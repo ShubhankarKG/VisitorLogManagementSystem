@@ -1,0 +1,20 @@
+{
+  "name": "visitor_log_management_system",
+  "version": "1.0.0",
+  "description": "A repository for the Visitor's Log Management System designed as a project under the course of Database Management System for the welfare of the college.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShubhankarKG/VisitorLogManagementSystem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShubhankarKG/VisitorLogManagementSystem/issues"
+  },
+  "homepage": "https://github.com/ShubhankarKG/VisitorLogManagementSystem#readme"
+}
