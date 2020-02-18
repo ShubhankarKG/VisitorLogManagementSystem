@@ -4,7 +4,7 @@
   "description": "A repository for the Visitor's Log Management System designed as a project under the course of Database Management System for the welfare of the college.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jshint index.js",
     "dev": "nodemon index.js"
   },
   "repository": {
@@ -23,6 +23,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "jshint": "^2.11.0",
     "nodemon": "^2.0.2"
   }
 }
