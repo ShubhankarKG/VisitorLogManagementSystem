@@ -3,9 +3,8 @@ import { Schema as _Schema, model } from 'mongoose';
 var Schema = _Schema;
 
 var facultySchema = new Schema({
-    _id : Schema.Types.ObjectId,
     Name : String,
-    Department : String,
+    Department : {type : Schema.Types.ObjectId, ref : 'Department'},
     Designation : String,
     email : {
         type : String,
