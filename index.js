@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
     console.log('A user connected');
 });
 
-db.on('error', console.error.bind(console, 'MongoDB Connection Error:'))
+db.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
 
 http.listen(3000, () => {
     console.log("Listening on port *:3000");
