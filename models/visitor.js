@@ -27,5 +27,5 @@ var visitorSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Visitor', visitorSchema)
+module.exports = mongoose.model('Visitor', visitorSchema);
 //export default model('Visitor', visitorSchema);
