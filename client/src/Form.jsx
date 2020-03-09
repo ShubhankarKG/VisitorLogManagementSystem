@@ -33,16 +33,16 @@ function Form(){
 
   }
 
-  function submitDetails(event){
-    event.preventDefault();
+  // function submitDetails(event){
+  //   event.preventDefault();
     
-  }
+  // }
 
 
   return (
     <div>
     <h1 className = "heading"> VISITOR'S LOG </h1>
-    <form action="https://localhost:3000/api/visitor/create" method="POST" id="form">
+    <form action="https://localhost:5000/api/visitor/create" method="POST" id="form">
         <div>
         <label> Name : </label>
         <input onChange = {handleChange} type = "text" placeholder = "First Name" name = "firstName" value = {form.firstName} />
