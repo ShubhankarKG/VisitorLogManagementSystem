@@ -20,10 +20,7 @@
   "homepage": "https://github.com/ShubhankarKG/VisitorLogManagementSystem#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-<<<<<<< HEAD
     "body-parser": "^1.19.0",
-=======
->>>>>>> 059252fae90ea4c45f9cd62c7f5e5a07ee5b4086
     "express": "^4.17.1",
     "mongoose": "^5.9.3",
     "npm": "^6.14.2",

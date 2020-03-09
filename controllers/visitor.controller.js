@@ -5,14 +5,15 @@ exports.test = (req, res) => {
 }
 
 exports.visitor_create = (req, res) => {
+    console.log(req.body);
     let visitor = new Visitor({
         ID : req.body.ID,
-        VisitorName : req.body.VisitorName,
-        Address : req.body.Address,
-        Gender : req.body.Gender,
+        VisitorName : req.body.firstName + req.body.lastName,
+        Address : req.body.address,
+        Gender : req.body.gender,
         Faculty : mongoose.Types.ObjectId(req.body.objectId),
-        ContactNumber : req.body.ContactNumber,
-        Description : req.body.Description,
+        ContactNumber : req.body.contact,
+        Description : req.body.description,
         email : req.body.email
     });
 

@@ -1,29 +1,32 @@
 /*esversion : 6*/
-const app = require('express')();
-const http = require('http').createServer(app);
+
+const express = require('express');
+//const http = require('http').createServer(app);
 const bodyParser = require('body-parser');
-const io = require('socket.io')(http);
+//const io = require('socket.io')(http);
 const mongoose = require('mongoose');
 
 const visitor = require('./routes/visitor.route');
 
-var mongoDB = 'mongodb://127.0.0.1/my_database';
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+const mongoDB = 'mongodb+srv://admin:LR%21RzEy7CwyfM4%40@cluster0-yr65m.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => console.log("DB Connected"));
 
-var db = mongoose.connection;
-
+const db = mongoose.connection;
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
 app.get('/api', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
 app.use('/api/visitor', visitor);
 
-io.on('connection', (socket) => {
-    console.log('A user connected');
-});
+// io.on('connection', (socket) => {
+//     console.log('A user connected');
+// });
 
 db.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
 
-http.listen(5000, () => {
+app.listen(5000, () => {
     console.log("Listening on port *:5000");
 });

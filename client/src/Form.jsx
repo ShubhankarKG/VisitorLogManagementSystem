@@ -34,15 +34,15 @@ function Form(){
   }
 
   function submitDetails(event){
-    console.log(form);
     event.preventDefault();
+    
   }
 
 
   return (
     <div>
     <h1 className = "heading"> VISITOR'S LOG </h1>
-    <form >
+    <form action="https://localhost:3000/api/visitor/create" method="POST" id="form">
         <div>
         <label> Name : </label>
         <input onChange = {handleChange} type = "text" placeholder = "First Name" name = "firstName" value = {form.firstName} />
@@ -78,7 +78,7 @@ function Form(){
           <input onChange = {handleChange} className = "address-input" type = "text" placeholder = "Reason for meeting" name = "description" value = {form.description} />
         </div>
 
-        <input onSubmit = {submitDetails} type = "submit" className = "submit"/>
+        <input type = "submit" form="form" className = "submit"/>
 
     </form>
     </div>
