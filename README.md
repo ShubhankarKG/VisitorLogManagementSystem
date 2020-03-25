@@ -4,6 +4,8 @@
 
 A repository for the Visitor's Log Management System designed as a project under the course of Database Management System for the welfare of the college.
 
+You need to trust the certificates in order to allow chrome. These can be found [here](https://reactpaths.com/how-to-get-https-working-in-localhost-development-environment-f17de34af046)
+
 ## Instructions for setting up repository
 
 ```javascript

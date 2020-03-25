@@ -8,8 +8,9 @@ env.config();
 console.log(process.env.MAIL_PASSWORD);
 
 const options = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
+    key: fs.readFileSync("rootSSL.key"),
+    cert: fs.readFileSync("rootSSL.pem"),
+    passphrase: "carmelconvent"
 };
 
 const express = require('express');
