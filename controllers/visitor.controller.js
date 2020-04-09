@@ -2,6 +2,7 @@ const Visitor = require('../models/visitor');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
+const ejs = require('ejs');
 
 dotenv.config();
 console.log(process.env.MAIL_PASSWORD);
@@ -9,7 +10,7 @@ var transporter = nodemailer.createTransport({
     service : 'Gmail',
     auth : {
         user : 'shubhankar.gupto.11@gmail.com',
-        pass : ''
+        pass : 'carmelconvent'
     }
 });
 
@@ -29,31 +30,27 @@ exports.visitor_create = (req, res) => {
         Description : req.body.description,
         email : req.body.email
     });
-    let flag = 0;
     
-    const mailOptions = {
-        from : 'shubhankar.gupto.11@gmail.com',
-        to : req.body.email,
-        subject : 'Verify User',
-        html : '<h1>Please enter the following passcode to continue</h1> <pre>653453</pre>'
-    };
-    
-    transporter.sendMail(mailOptions, (err, info) => {
+    ejs.renderFile( + "../mail_confirmation.ejs", {name : req.body.firstName + " " + req.body.lastName}, (err, data) => {
         if (err) console.log(err);
-        else console.log(info);
-    })
-    
-    //res.redirect('/test');
-
-    if (flag===1){
-        visitor.save((err) => {
-            if (err) console.log(err);
-            else res.send('Visitor Added Succcessfully')
-        });
-    }
-    else {
-        res.send("<h2>Sorry, authentication failed</h2>");
-    }
+        else {
+            const mailOptions = {
+                from : 'shubhankar.gupto.11@gmail.com',
+                to : req.body.email,
+                subject : 'Account Verified',
+                html : data
+            };
+            
+            transporter.sendMail(mailOptions, (err, info) => {
+                if (err) console.log(err);
+                else console.log(info);
+            })
+        }
+    });
+    visitor.save((err) => {
+        if (err) console.log(err);
+        else res.send('Visitor Added Succcessfully')
+    });
 }
 
 exports.visitor_details = (req, res) => {

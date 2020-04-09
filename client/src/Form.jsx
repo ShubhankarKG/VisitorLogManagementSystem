@@ -45,7 +45,6 @@ function Form() {
         <Paper style={{ padding: 16 }} id="from_style">
           <Grid container alignItems="flex-start" spacing={2}>
             <Grid container xs={12}>
-              <label> Name : </label>
             </Grid>
 
             <Grid item xs={6}>
