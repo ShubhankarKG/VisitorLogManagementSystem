@@ -38,12 +38,11 @@ function Form() {
   function getData () {
     axios.get("https://localhost:5000/api/faculty/")
       .then((response) => {
-        const data = response.data;
-        setFaculty(() => [...faculty, data]);
-        console.log("Data received");
+        console.log(response.data)
+        setFaculty(response.data);
       })
-      .catch(() => {
-        alert("Error retrieving data");
+      .catch((e) => {
+        alert(e.toString());
       })
   }
 
@@ -183,7 +182,7 @@ function Form() {
           <Grid item xs={12}>
             <Autocomplete
               id="combo-box-demo"
-              options={this.faculty}
+              options={faculty}
               style={{ width: 250 }}
               renderInput={(params) => (
                 <TextField

@@ -4,12 +4,16 @@ const mongoose = require("mongoose");
 exports.faculty_retrieve = (req, res) => {
    Faculty.find({}, (err, faculties) => {
     if (err) console.log(err);
-    var facultyMap = {};
+    var facultyList = [];
     faculties.forEach((faculty) => {
-        facultyMap[faculty._id] = faculty;
+        console.log(faculty["Name"]);
+        console.log(faculty["_id"]);
+        facultyList.push(faculty["Name"]);
     });
-    JSON.stringify(facultyMap);
-    res.json(facultyMap);
+    // facultyMap = {
+    //     data : facultyList,
+    // }
+    res.json(facultyList);
    })
 };
 
