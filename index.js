@@ -1,6 +1,7 @@
 /*esversion : 6*/
 const https = require('https');
 const fs = require('fs');
+const cors = require('cors');
 
 const env = require('dotenv');
 
@@ -27,6 +28,7 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
 
 const db = mongoose.connection;
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 app.get('/api', (req, res) => {
