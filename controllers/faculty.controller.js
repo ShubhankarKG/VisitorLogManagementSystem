@@ -1,6 +1,18 @@
 const Faculty = require("../models/faculty");
 const mongoose = require("mongoose");
 
+exports.faculty_retrieve = (req, res) => {
+   Faculty.find({}, (err, faculties) => {
+    if (err) console.log(err);
+    var facultyMap = {};
+    faculties.forEach((faculty) => {
+        facultyMap[faculty._id] = faculty;
+    });
+    JSON.stringify(facultyMap);
+    res.json(facultyMap);
+   })
+};
+
 exports.faculty_create = (req, res) => {
     console.log(req.body);
     let faculty = new Faculty({
