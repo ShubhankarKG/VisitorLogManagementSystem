@@ -43,6 +43,8 @@ app.get("/", (req, res) => {
 app.use('/api/visitor', visitor);
 app.use('/api/faculty', faculty);
 
+app.set('view engine', 'ejs');
+
 // io.on('connection', (socket) => {
 //     console.log('A user connected');
 // });

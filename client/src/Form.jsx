@@ -8,9 +8,12 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 import "./App.css";
+import { useEffect } from "react";
 
 function Form() {
+
   const [form, updateForm] = React.useState({
     firstName: "",
     lastName: "",
@@ -30,6 +33,23 @@ function Form() {
   const otpFieldRef = React.useRef(null);
   const [status, setStatus] = React.useState("Validating visitor...");
   const [error, setError] = React.useState(false);
+  const [faculty, setFaculty] = React.useState([]);
+
+  function getData () {
+    axios.get("https://localhost:5000/api/faculty/")
+      .then((response) => {
+        const data = response.data;
+        setFaculty(() => [...faculty, data]);
+        console.log("Data received");
+      })
+      .catch(() => {
+        alert("Error retrieving data");
+      })
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   function handleClick(event) {
     event.preventDefault();
@@ -64,12 +84,12 @@ function Form() {
   }
 
   function validateOTP(event) {
-    if(otpFieldRef.current && parseInt(otpFieldRef.current.value) !== otp) {
+    if (otpFieldRef.current && parseInt(otpFieldRef.current.value) !== otp) {
       otpFieldRef.current.value = "";
       setError(true);
       otpFieldRef.current.placeholder = "Please try again.";
     }
-    if(otpFieldRef.current && parseInt(otpFieldRef.current.value) === otp) {
+    if (otpFieldRef.current && parseInt(otpFieldRef.current.value) === otp) {
       setError(false);
       fetch("https://localhost:5000/api/visitor/validate", {
         method: "GET",
@@ -78,10 +98,10 @@ function Form() {
           "Content-Type": "application/json",
         },
       })
-      .then(response => response.json())
-      .then(result => {
-        setStatus(result.info);
-      });
+        .then(response => response.json())
+        .then(result => {
+          setStatus(result.info);
+        });
     }
   }
 
@@ -163,7 +183,7 @@ function Form() {
           <Grid item xs={12}>
             <Autocomplete
               id="combo-box-demo"
-              options={["My life", "my rules"]}
+              options={this.faculty}
               style={{ width: 250 }}
               renderInput={(params) => (
                 <TextField
@@ -197,26 +217,26 @@ function Form() {
     } else if (step === 2) {
       return (
         <>
-        <Grid item xs={9}>
-          <TextField
-            type="text"
-            placeholder="Enter OTP"
-            error={!!error}
-            inputRef={otpFieldRef}
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <Button
-            onClick={validateOTP}
-          >
-            Validate OTP
+          <Grid item xs={9}>
+            <TextField
+              type="text"
+              placeholder="Enter OTP"
+              error={!!error}
+              inputRef={otpFieldRef}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <Button
+              onClick={validateOTP}
+            >
+              Validate OTP
           </Button>
-        </Grid>
-        <Grid container justify="center" item xs={12}>
-          <Typography>
-          {status}
-          </Typography>
-        </Grid>
+          </Grid>
+          <Grid container justify="center" item xs={12}>
+            <Typography>
+              {status}
+            </Typography>
+          </Grid>
         </>
       );
     }
@@ -224,11 +244,13 @@ function Form() {
 
   return (
     <Container maxWidth="sm">
-      <div className="heading">
-        <Typography variant="h4">
-          VISITOR'S LOG
+      <header>
+        <div className="heading">
+          <Typography variant="h4">
+            VISITOR'S LOG
         </Typography>
-      </div>
+        </div>
+      </header>
       <Paper style={{ padding: 16 }} id="from_style">
         <Grid container alignItems="flex-start" spacing={2}>
           {renderForm(step)}

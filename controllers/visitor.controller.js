@@ -7,10 +7,12 @@ const ejs = require('ejs');
 dotenv.config();
 
 var transporter = nodemailer.createTransport({
-    service : 'Gmail',
+    service : 'gmail.com',
+    // port : 587,
+    // secure : true,
     auth : {
-        user : '',
-        pass : ''
+        user : 'shubhankar.gupto.11@gmail.com',
+        pass : 'carmelconvent'
     }
 });
 
@@ -34,19 +36,27 @@ exports.visitor_create = (req, res) => {
 
     //Todo: Find a better otp generating function.
     const otp = Math.floor(Math.random() * 899999 + 100000);
-    
-    const mailOptionsVisitor = {
-        from : '@gmail.com',
-        to : req.body.email,
-        subject : 'Verify User',
-        html : `<h1>Please enter the following passcode to continue</h1> <pre>${otp}</pre>`
-    };
-    
-    transporter.sendMail(mailOptionsVisitor, (err, info) => {
-        if (err) console.log(err);
-        else console.log(info);
-    });
 
+    ejs.renderFile(__dirname + "/mail_confirmation.ejs", {
+        name : req.body.firstName + " " + req.body.lastName,
+        otp : otp,
+    }, (err, data) => {
+        if (err) console.log(err);
+        else {
+            const mailOptionsVisitor = {
+                from : 'shubhankar.gupto.11@gmail.com',
+                to : req.body.email,
+                subject : 'Verify User',
+                html : data,
+            };
+
+            transporter.sendMail(mailOptionsVisitor, (err, info) => {
+                if (err) console.log(err);
+                else console.log(info);
+            });        
+        }
+    });
+    
     const mailOptionFaculty = {
         from: '@gmail.com',
         to: '',

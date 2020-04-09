@@ -15,3 +15,7 @@ exports.faculty_create = (req, res) => {
         else res.send("Faculty added successfully");
     });
 };
+
+exports.faculty_submit = (req, res) => {
+    /* TODO : Find ways to integrate faculty and visitor here */
+}
