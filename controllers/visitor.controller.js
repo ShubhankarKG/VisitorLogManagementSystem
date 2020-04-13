@@ -28,7 +28,7 @@ exports.visitor_create = (req, res) => {
         VisitorName : req.body.firstName +" "+ req.body.lastName,
         Address : req.body.address,
         Gender : req.body.gender,
-        Faculty : mongoose.Types.ObjectId(req.body.objectId),
+        Faculty : mongoose.Types.ObjectId(req.body.facultyID),
         ContactNumber : req.body.contact,
         Description : req.body.description,
         email : req.body.email
@@ -57,16 +57,23 @@ exports.visitor_create = (req, res) => {
         }
     });
     
-    const mailOptionFaculty = {
-        from: '@gmail.com',
-        to: '',
-        subject: 'Visitor',
-        html: ''
-    }
-
-    transporter.sendMail(mailOptionFaculty, (err, info) => {
+    ejs.renderFile(__dirname + "/faculty_visitor.ejs", {
+        name : req.body.firstName + " " + req.body.lastName,
+    }, (err, data) => {
         if (err) console.log(err);
-        else console.log(info);
+        else {
+            const mailOptionsVisitor = {
+                from : 'shubhankar.gupto.11@gmail.com',
+                to : req.body.facultyEmail,
+                subject : 'A visitor wants to meet you',
+                html : data,
+            };
+
+            transporter.sendMail(mailOptionsVisitor, (err, info) => {
+                if (err) console.log(err);
+                else console.log(info);
+            });        
+        }
     });
 
     res.json({otp});

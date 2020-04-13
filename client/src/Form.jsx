@@ -1,6 +1,8 @@
 import React from "react";
 import Gender from "./gender.jsx";
 import Gate from "./Gate.jsx";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -22,8 +24,9 @@ function Form() {
     address: "",
     email: "",
     gate: "",
-    faculty: "",
+    facultyID: "",
     description: "",
+    facultyEmail: "",
   });
 
   const [step, setStep] = React.useState(1);
@@ -38,7 +41,6 @@ function Form() {
   function getData () {
     axios.get("https://localhost:5000/api/faculty/")
       .then((response) => {
-        console.log(response.data)
         setFaculty(response.data);
       })
       .catch((e) => {
@@ -111,7 +113,6 @@ function Form() {
           <Grid item container xs={12}>
             <label> Name : </label>
           </Grid>
-
           <Grid item xs={6}>
             <TextField
               fullWidth
@@ -137,7 +138,18 @@ function Form() {
           </Grid>
 
           <Grid item xs={12}>
-            <Gender change={handleChange} />
+            <label> Gender: </label> 
+            <Select
+              onChange={(event) => {
+                updateForm(form => ({
+                  ...form,
+                  gender: event.target.value,
+                }))
+              }}
+            >
+              <MenuItem value='Male'>Male</MenuItem>
+              <MenuItem value='Female'>Female</MenuItem>
+            </Select>
           </Grid>
 
           <Grid item xs={12}>
@@ -176,14 +188,36 @@ function Form() {
           </Grid>
 
           <Grid item xs={12}>
-            <Gate gateChange={handleChange} />
+            <label> Gate: </label> 
+            <Select
+              onChange={(event) => {
+                updateForm(form => ({
+                  ...form,
+                  gate: event.target.value,
+                }))
+              }}
+            >
+              <MenuItem value='Main Gate'>Main Gate</MenuItem>
+              <MenuItem value='Mechanical Gate'>Mechanical Gate</MenuItem>
+            </Select>
           </Grid>
 
           <Grid item xs={12}>
             <Autocomplete
               id="combo-box-demo"
+              // options is an array of objects.
               options={faculty}
               style={{ width: 250 }}
+              // getOptionLabel defines what to show on the list.
+              getOptionLabel={option => option.name}
+              onChange={(event, value, reason) => {
+                // value = option = {name, id, email} 
+                updateForm(form => ({
+                  ...form,
+                  facultyEmail: value.email,
+                  facultyID: value.id,
+                }));
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
