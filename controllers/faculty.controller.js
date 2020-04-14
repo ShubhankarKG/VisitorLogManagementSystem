@@ -4,15 +4,14 @@ const mongoose = require("mongoose");
 exports.faculty_retrieve = (req, res) => {
    Faculty.find({}, (err, faculties) => {
     if (err) console.log(err);
-    var facultyList = [];
-    faculties.forEach((faculty) => {
-        console.log(faculty["Name"]);
-        console.log(faculty["_id"]);
-        facultyList.push(faculty["Name"]);
-    });
-    // facultyMap = {
-    //     data : facultyList,
-    // }
+    //var facultyList = [];
+    // Thumb rule: Avoid using var always. Use either const or let.
+    // var has weird scoping rules which end up in runtime errors.
+    const facultyList = faculties.map((faculty) => ({
+        name: faculty["Name"], 
+        id: faculty['_id'], 
+        email: faculty['email']
+    }));
     res.json(facultyList);
    })
 };
