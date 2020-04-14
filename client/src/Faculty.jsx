@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import "./App.css";
 
 function Faculty() {
@@ -14,6 +13,7 @@ function Faculty() {
 		designation: "",
 		department: "",
 		email: "",
+		isHOD: false
 	});
 
 	function handleChange(event) {
@@ -37,10 +37,6 @@ function Faculty() {
 			<form action="https://localhost:5000/api/faculty/create" method="POST" id="form" noValidate>
 				<Paper style={{ padding: 16 }} id="from_style">
 					<Grid container alignItems="flex-start" spacing={2}>
-						<Grid container xs={12}>
-						
-						</Grid>
-
 						<Grid item xs={6}>
 							<TextField
 								fullWidth

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Home from "./Home.jsx";
 import Form from "./Form.jsx";
 import Faculty from "./Faculty.jsx";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import { Divider, List, ListItem, ListItemText, AppBar, Toolbar, Typography, IconButton, Drawer, CssBaseline } from '@material-ui/core';
@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -130,7 +129,7 @@ function App() {
             </IconButton>
           </div>
           <ListItem>
-            <a href="http://www.vjti.ac.in/" target="_blank"><img src={download} alt="VJTI_Logo" /></a>
+            <a href="http://www.vjti.ac.in/" target="_blank" rel="noopener noreferrer"><img src={download} alt="VJTI_Logo" /></a>
           </ListItem>
           < Divider />
           <List>

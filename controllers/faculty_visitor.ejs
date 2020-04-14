@@ -1,105 +1,165 @@
 <style type="text/css">
-    .header {
-        background: #8a8a8a;
-    }
+  .header {
+    background: #8a8a8a;
+  }
 
-    .header .columns {
-        padding-bottom: 0;
-    }
+  .header .columns {
+    padding-bottom: 0;
+  }
 
-    .header p {
-        color: #fff;
-        padding-top: 15px;
-    }
+  .header p {
+    color: #fff;
+    padding-top: 15px;
+  }
 
-    .header .wrapper-inner {
-        padding: 20px;
-    }
+  .header .wrapper-inner {
+    padding: 20px;
+  }
 
-    .header .container {
-        background: transparent;
-    }
+  .header .container {
+    background: transparent;
+  }
 
-    .wrapper.secondary {
-        background: #f3f3f3;
-    }
+  .wrapper.secondary {
+    background: #f3f3f3;
+  }
 
-    .two-column {
-        text-align: center;
-        font-size: 0;
-    }
+  .two-column {
+    text-align: center;
+    font-size: 0;
+  }
 
-    .two-column .column {
-        width: 100%;
-        max-width: 300px;
-        display: inline-block;
-        vertical-align: top;
-    }
+  .two-column .column {
+    width: 100%;
+    max-width: 300px;
+    display: inline-block;
+    vertical-align: top;
+  }
 
-    .contents {
-        width: 100%;
-    }
+  .contents {
+    width: 100%;
+  }
 
-    .two-column .contents {
-        font-size: 14px;
-        text-align: left;
-    }
+  .two-column .contents {
+    font-size: 14px;
+    text-align: left;
+  }
 
-    .two-column img {
-        width: 100%;
-        max-width: 280px;
-        height: auto;
-    }
+  .two-column img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+  }
 
-    .two-column .text {
-        padding-top: 10px;
-    }
+  .two-column .text {
+    padding-top: 10px;
+  }
 
-    .inner {
-        padding: 10px;
-    }
+  .inner {
+    padding: 10px;
+  }
 
-    table {
-        border-spacing: 0;
-        color: #333333;
-        font-family: Arial, sans-serif;
-    }
+  table {
+    border-spacing: 0;
+    color: #333333;
+    font-family: Arial, sans-serif;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
 </style>
+</head>
 
-<container>
+<body>
+
+  </style>
+
+  <container>
 
     <row>
       <columns small="12">
-  
+
         <table class="one-column" border="0" cellpadding="0" cellspacing="0" width="100%"
           style="border-spacing:0; border-left:1px solid #e8e7e5; border-right:1px solid #e8e7e5; border-bottom:1px solid #e8e7e5; padding: 10px"
           bg="#FFFFFF">
-  
+
           <tr>
             <td align="center" style="padding:0px 40px 40px 40px">
               <p style="color:#262626; font-size:32px; text-align:center; font-family: Verdana, Geneva, sans-serif">
-                Hello! <br> <%= name %></p>
+                Greetings from Visitor Log VJTI ! </p>
               <b
                 style="color:#000000; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif; line-height:22px ">
-                The following visitor wants to meet you. Please provide him a location and time.</b><br />
+                The following visitor wants to meet you. Please provide him a location and
+                time.</b><br />
               <br />
               </p>
+              <table>
+                <tr>
+                  <th>Visitor</th>
+                  <th>Information</th>
+                </tr>
+                <tr>
+                  <td>Visitor Name </td>
+                  <td><%= visitorName %></td>
+                </tr>
+                <tr>
+                  <td>Gender </td>
+                  <td><%= gender %></td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td><%= address %></td>
+                </tr>
+                <tr>
+                  <td>Contact</td>
+                  <td><%= contactNumber %></td>
+                </tr>
+                <tr>
+                  <td>Reason</td>
+                  <td><%= description %></td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td><%= email %></td>
+                </tr>
+
+              </table>
+
             </td>
           </tr>
 
           <tr style="margin-bottom: 20px">
             <td align="center">
-                <table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
-                    <tr>
-                        <td width="250" height="60" align="center" bgcolor="#2f9780" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;">
-                            <a href="https://localhost:5000/api/faculty/submit" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: #ffffff" class="button_link">Proceed to Site
-                                <img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/73ac4376-78ab-4d32-a0b5-b8195202e51f.jpg" width="32" height="17" style="padding-top:5px" alt="" border="0"/>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
+              <table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
+                <tr>
+                  <td width="250" height="60" align="center" bgcolor="#2f9780"
+                    style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;">
+                    <a href="https://localhost:5000/api/faculty/submit"
+                      style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: #ffffff"
+                      class="button_link">Proceed to Site
+                      <img
+                        src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/73ac4376-78ab-4d32-a0b5-b8195202e51f.jpg"
+                        width="32" height="17" style="padding-top:5px" alt="" border="0" />
+                    </a>
+                  </td>
+                </tr>
+              </table>
             </td>
-        </tr>
+          </tr>
         </table>
       </columns>
     </row>

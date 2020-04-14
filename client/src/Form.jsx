@@ -1,6 +1,4 @@
 import React from "react";
-import Gender from "./gender.jsx";
-import Gate from "./Gate.jsx";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from "@material-ui/core/Typography";
