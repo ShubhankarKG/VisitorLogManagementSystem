@@ -38,7 +38,7 @@ app.get('/api', (req, res) => {
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
-})
+});
 
 app.use('/api/visitor', visitor);
 app.use('/api/faculty', faculty);

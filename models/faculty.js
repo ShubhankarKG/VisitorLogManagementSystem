@@ -10,7 +10,10 @@ var facultySchema = new Schema({
     Designation: String,
     email: {
         type: String,
-        // match: /^[a-zA-Z0-9_+&*-] + (?:\\.[a-zA-Z0-9_+&*-]+ )*@(?:[a-zA-Z0-9-]+\\.) + [a-zA-Z]{2, 7}/
+    },
+    HOD: {
+        type: Boolean,
+        default: false,
     }
 });
 

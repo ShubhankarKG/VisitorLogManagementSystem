@@ -15,6 +15,7 @@ function Faculty() {
 		designation: "",
 		department: "",
 		email: "",
+		isHOD: false
 	});
 
 	function handleChange(event) {
@@ -38,10 +39,6 @@ function Faculty() {
 			<form action="https://localhost:5000/api/faculty/create" method="POST" id="form" noValidate>
 				<Paper style={{ padding: 16 }} id="from_style">
 					<Grid container alignItems="flex-start" spacing={2}>
-						<Grid container xs={12}>
-						
-						</Grid>
-
 						<Grid item xs={6}>
 							<TextField
 								fullWidth
