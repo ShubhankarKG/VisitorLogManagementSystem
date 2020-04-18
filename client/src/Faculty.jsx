@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
+import Input from "@material-ui/core/Input";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import "./App.css";
 
@@ -101,9 +102,14 @@ function Faculty() {
 						</Grid>
 
 						<Grid item xs={12} justify="center">
-							<input
+							<Input
 								type="submit"
-								form="form"
+								inputProps={{
+									form: "form",
+									style: {
+										cursor: "pointer"
+									}
+								}}
 								className="submit" />
 						</Grid>
 					</Grid>
