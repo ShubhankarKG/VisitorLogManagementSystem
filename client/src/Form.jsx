@@ -1,16 +1,8 @@
-import React from "react";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
+import { React, useEffect } from "react";
+import { Select, MenuItem, Typography, Container, Grid, TextField, Paper, Button } from '@material-ui/core';
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import Button from "@material-ui/core/Button";
 import axios from "axios";
 import "./App.css";
-import { useEffect } from "react";
 
 function Form() {
 
@@ -36,7 +28,7 @@ function Form() {
   const [error, setError] = React.useState(false);
   const [faculty, setFaculty] = React.useState([]);
 
-  function getData () {
+  function getData() {
     axios.get("https://localhost:5000/api/faculty/")
       .then((response) => {
         setFaculty(response.data);
@@ -136,7 +128,7 @@ function Form() {
           </Grid>
 
           <Grid item xs={12}>
-            <label> Gender: </label> 
+            <label> Gender: </label>
             <Select
               onChange={(event) => {
                 updateForm(form => ({
@@ -186,7 +178,7 @@ function Form() {
           </Grid>
 
           <Grid item xs={12}>
-            <label> Gate: </label> 
+            <label> Gate: </label>
             <Select
               onChange={(event) => {
                 updateForm(form => ({
