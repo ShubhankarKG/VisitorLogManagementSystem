@@ -6,11 +6,13 @@ import Faculty from "./Faculty.jsx";
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
-import { Divider, List, ListItem, ListItemText, AppBar, Toolbar, Typography, IconButton, Drawer, CssBaseline } from '@material-ui/core';
+import { Divider, List, ListItem, ListItemText, AppBar, Toolbar, Typography, IconButton, Drawer, CssBaseline, Button } from '@material-ui/core';
 import { Link, Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import download from "./assets/images/download.jpeg";
 import Dashboard from './Dashboard';
+import AdminSignup from "./AdminSignup";
+import AdminLogin from "./AdminLogin";
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -84,9 +86,9 @@ function App() {
     setOpen(false);
   };
 
-  const onItemClick = () => {
-
-  };
+  const handleAdmin = () => {
+    history.push('/AdminLogin');
+  }
 
   return (
     <div className={classes.root}>
@@ -96,6 +98,7 @@ function App() {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        style={{ display: 'flex' }}
       >
         <Toolbar>
           <IconButton
@@ -108,9 +111,19 @@ function App() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title} noWrap>
+          <Typography variant="h6" className={classes.title} noWrap style={{ flex: 1 }}>
             Visitor Log - VJTI
           </Typography>
+          <IconButton
+            edge="end"
+            color="inherit"
+          >
+            <Button variant="contained" color="primary" disableElevation onClick={handleAdmin}>
+              <Typography variant="h6" className={classes.title}>
+                Admin
+              </Typography>
+            </Button>
+          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -134,16 +147,16 @@ function App() {
           </ListItem>
           < Divider />
           <List>
-            <ListItem button component={Link} to="/" onClick={onItemClick('Home')}>
+            <ListItem button component={Link} to="/">
               <ListItemText>Home</ListItemText>
             </ListItem>
-            <ListItem button component={Link} to="/form" onClick={onItemClick('Visitor')}>
+            <ListItem button component={Link} to="/form">
               <ListItemText>Visitor</ListItemText>
             </ListItem>
-            <ListItem button component={Link} to="/faculty" onClick={onItemClick('Faculty')}>
+            <ListItem button component={Link} to="/faculty">
               <ListItemText>Faculty</ListItemText>
             </ListItem>
-            <ListItem button component={Link} to="/dashboard" onClick={onItemClick('Dashboard')}>
+            <ListItem button component={Link} to="/dashboard">
               <ListItemText>Dashboard</ListItemText>
             </ListItem>
           </List>
@@ -160,12 +173,14 @@ function App() {
         <main className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}>
-          
+
           <div className={classes.drawerHeader} />
             <Route exact path="/" component={Home} />
             <Route path="/form" component={Form} />
             <Route path="/faculty" component={Faculty} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/adminSignup" component={AdminSignup}/>
+            <Route path="/adminLogin" component={AdminLogin}/>
         </main>
       </Router>
     </div>

@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var visitorSchema = new Schema({
-    // ID : {
-    //     type: String,
-    //     required: true
-    // },
     VisitorName : { 
         type: String,
         required: true
@@ -22,10 +18,8 @@ var visitorSchema = new Schema({
     Description : String,
     email : {
         type : String,
-        //match : /^[a-zA-Z0-9_+&*-] + (?:\\.[a-zA-Z0-9_+&*-]+ )*@(?:[a-zA-Z0-9-]+\\.) + [a-zA-Z]{2, 7}/,
         required: true
     }
 });
 
 module.exports = mongoose.model('Visitor', visitorSchema);
-//export default model('Visitor', visitorSchema);
