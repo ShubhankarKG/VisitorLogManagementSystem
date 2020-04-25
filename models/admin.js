@@ -1,26 +1,10 @@
-import { Schema as _Schema, model } from 'mongoose';
-import { bcrypt } from 'bcryptjs';
-
-var Schema = _Schema;
-
+// import { Schema as _Schema, model } from 'mongoose';
+const Schema = require('mongoose').Schema;
+const model = require('mongoose').model;
 var adminSchema = new Schema({
-    Name : String,
-    Password : String  /* TODO : Secure using password hash */
+	Email: String,
+	Password: String,  /* TODO : Secure using password hash */
+	IdNumber: Number
 });
 
-module.exports.hashPassword = (admin, callback) => {
-    bcrypt.genSalt(10, (err, salt) => {
-        if (err) console.log(err);
-        else {
-            bcrypt.hash(admin.Password, salt, (err, hash) => {
-                if(err) console.log(err);
-                else{
-                    admin.Password = hash;
-                    callback(admin);
-                }
-            });
-        }
-    });
-};
-
-export default model('Admin', adminSchema);
+module.exports = model('Admin', adminSchema);

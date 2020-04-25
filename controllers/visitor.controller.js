@@ -1,9 +1,7 @@
 const Visitor = require('../models/visitor');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
 const ejs = require('ejs');
-dotenv.config();
 
 var transporter = nodemailer.createTransport({
   service: 'gmail.com',

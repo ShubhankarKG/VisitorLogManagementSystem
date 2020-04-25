@@ -5,6 +5,7 @@ const fs = require('fs');
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 const options = {
     key: fs.readFileSync("rootSSL.key"),
@@ -14,6 +15,7 @@ const options = {
 
 const visitor = require('./routes/visitor.route');
 const faculty = require('./routes/faculty.route');
+const admin = require('./routes/admin.route');
 
 const mongoDB = process.env.MONGODB_URL;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -25,6 +27,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit : '50mb' }));
 app.use(express.urlencoded({ extended : true, limit : '50mb' }));
+app.use(morgan("combined"));
 
 app.get('/api', (req, res) => {
     res.sendFile("client/index.html");
@@ -32,6 +35,7 @@ app.get('/api', (req, res) => {
 
 app.use('/api/visitor', visitor);
 app.use('/api/faculty', faculty);
+app.use('/api/admin', admin);
 app.use(express.static('client/build'));
 
 app.set('view engine', 'ejs');
