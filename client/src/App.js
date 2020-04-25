@@ -10,6 +10,7 @@ import { Divider, List, ListItem, ListItemText, AppBar, Toolbar, Typography, Ico
 import { Link, Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import download from "./assets/images/download.jpeg";
+import Dashboard from './Dashboard';
 import AdminSignup from "./AdminSignup";
 import AdminLogin from "./AdminLogin";
 
@@ -149,11 +150,14 @@ function App() {
             <ListItem button component={Link} to="/">
               <ListItemText>Home</ListItemText>
             </ListItem>
-            <ListItem button component={Link} to="/Form">
+            <ListItem button component={Link} to="/form">
               <ListItemText>Visitor</ListItemText>
             </ListItem>
-            <ListItem button component={Link} to="/Faculty">
+            <ListItem button component={Link} to="/faculty">
               <ListItemText>Faculty</ListItemText>
+            </ListItem>
+            <ListItem button component={Link} to="/dashboard">
+              <ListItemText>Dashboard</ListItemText>
             </ListItem>
           </List>
 
@@ -171,11 +175,12 @@ function App() {
         })}>
 
           <div className={classes.drawerHeader} />
-          <Route exact path="/" component={Home} />
-          <Route path="/Form" component={Form} />
-          <Route path="/Faculty" component={Faculty} />
-          <Route path="/AdminSignup" component={AdminSignup}/>
-          <Route path="/AdminLogin" component={AdminLogin}/>
+            <Route exact path="/" component={Home} />
+            <Route path="/form" component={Form} />
+            <Route path="/faculty" component={Faculty} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/adminSignup" component={AdminSignup}/>
+            <Route path="/adminLogin" component={AdminLogin}/>
         </main>
       </Router>
     </div>

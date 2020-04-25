@@ -15,6 +15,7 @@ const options = {
 
 const visitor = require('./routes/visitor.route');
 const faculty = require('./routes/faculty.route');
+const visitingDetails = require('./routes/visitingDetails.route');
 const admin = require('./routes/admin.route');
 
 const mongoDB = process.env.MONGODB_URL;
@@ -35,6 +36,7 @@ app.get('/api', (req, res) => {
 
 app.use('/api/visitor', visitor);
 app.use('/api/faculty', faculty);
+app.use('/api/dashboard', visitingDetails);
 app.use('/api/admin', admin);
 app.use(express.static('client/build'));
 

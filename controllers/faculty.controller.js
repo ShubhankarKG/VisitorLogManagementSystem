@@ -10,7 +10,8 @@ exports.faculty_retrieve = (req, res) => {
     const facultyList = faculties.map((faculty) => ({
         name: faculty["Name"], 
         id: faculty['_id'], 
-        email: faculty['email']
+        email: faculty['email'],
+        username: faculty['username'],
     }));
     res.json(facultyList);
    })
