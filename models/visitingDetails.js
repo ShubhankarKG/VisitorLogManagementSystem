@@ -1,26 +1,27 @@
-import { Schema as _Schema, model } from 'mongoose';
+const mongoose = require('mongoose');
+const addHours = require('date-fns/addHours');
 
-var Schema = _Schema;
+const Schema = mongoose.Schema;
+
+const addHour = () => {
+    return addHours(Date.now(), 1);
+}
 
 var visitingDetailsSchema = new Schema({
     VisitorID : String,
     VisitorName : String,
+    VisitorEmail: String,
     DateIn : Date,
     DateOut : Date,
     TimeIn : { type : Date, default : Date.now },
     TimeOut : { type : Date, default : Date.now },
-    GateIn : {
-        type : Schema.Types.ObjectId,
-        ref : 'Gate'
-    } /* Populate with gate Schema */,
-    GateOut : {
-        type : Schema.Types.ObjectId,
-        ref : 'Gate'
-    } /* Populate with gate Schema */,
     VehicleNumber : String,
     VisitingFaculty : String,
     Relation : String,
-    Description : Text
+    Description : String,
+    Place: String,
+    Date: { type: Date, default: Date.now},
+    Time: { type: Date, default: addHour}
 });
 
-export default model('VisitingDetails', visitingDetailsSchema);
+module.exports = mongoose.model('VisitingDetails', visitingDetailsSchema);

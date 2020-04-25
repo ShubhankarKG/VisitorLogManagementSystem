@@ -25,6 +25,7 @@ function Form() {
     facultyID: "",
     description: "",
     facultyEmail: "",
+    facultyUserName: "",
   });
 
   const [step, setStep] = React.useState(1);
@@ -209,11 +210,12 @@ function Form() {
               // getOptionLabel defines what to show on the list.
               getOptionLabel={option => option.name}
               onChange={(event, value, reason) => {
-                // value = option = {name, id, email} 
+                // value = option = {name, id, email, username} 
                 updateForm(form => ({
                   ...form,
                   facultyEmail: value.email,
                   facultyID: value.id,
+                  facultyUserName: value.username,
                 }));
               }}
               renderInput={(params) => (

@@ -100,6 +100,7 @@ function Faculty() {
 
 						<Grid item xs={12} justify="center">
 							<Input
+								disableUnderline
 								type="submit"
 								inputProps={{
 									form: "form",

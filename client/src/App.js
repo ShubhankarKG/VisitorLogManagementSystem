@@ -10,6 +10,7 @@ import { Divider, List, ListItem, ListItemText, AppBar, Toolbar, Typography, Ico
 import { Link, Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import download from "./assets/images/download.jpeg";
+import Dashboard from './Dashboard';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -136,11 +137,14 @@ function App() {
             <ListItem button component={Link} to="/" onClick={onItemClick('Home')}>
               <ListItemText>Home</ListItemText>
             </ListItem>
-            <ListItem button component={Link} to="/Form" onClick={onItemClick('Visitor')}>
+            <ListItem button component={Link} to="/form" onClick={onItemClick('Visitor')}>
               <ListItemText>Visitor</ListItemText>
             </ListItem>
-            <ListItem button component={Link} to="/Faculty" onClick={onItemClick('Faculty')}>
+            <ListItem button component={Link} to="/faculty" onClick={onItemClick('Faculty')}>
               <ListItemText>Faculty</ListItemText>
+            </ListItem>
+            <ListItem button component={Link} to="/dashboard" onClick={onItemClick('Dashboard')}>
+              <ListItemText>Dashboard</ListItemText>
             </ListItem>
           </List>
 
@@ -159,8 +163,9 @@ function App() {
           
           <div className={classes.drawerHeader} />
             <Route exact path="/" component={Home} />
-            <Route path="/Form" component={Form} />
-            <Route path="/Faculty" component={Faculty} />
+            <Route path="/form" component={Form} />
+            <Route path="/faculty" component={Faculty} />
+            <Route path="/dashboard" component={Dashboard} />
         </main>
       </Router>
     </div>

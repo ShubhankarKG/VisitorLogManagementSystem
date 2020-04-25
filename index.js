@@ -15,12 +15,11 @@ const options = {
 };
 
 const express = require('express');
-//const http = require('http').createServer(app);
-//const io = require('socket.io')(http);
 const mongoose = require('mongoose');
 
 const visitor = require('./routes/visitor.route');
 const faculty = require('./routes/faculty.route');
+const visitingDetails = require('./routes/visitingDetails.route');
 
 const mongoDB = 'mongodb+srv://admin:LR%21RzEy7CwyfM4%40@cluster0-yr65m.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -42,12 +41,9 @@ app.get("/", (req, res) => {
 
 app.use('/api/visitor', visitor);
 app.use('/api/faculty', faculty);
+app.use('/api/dashboard', visitingDetails);
 
 app.set('view engine', 'ejs');
-
-// io.on('connection', (socket) => {
-//     console.log('A user connected');
-// });
 
 db.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
 
