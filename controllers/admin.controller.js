@@ -95,3 +95,10 @@ exports.admin_login = (req, res) => {
 				});
 		});
 }
+
+exports.admin_details = (req, res) => {
+	Admin.findById(req.admin.id)
+		.select('-Password')
+		.then(admin => res.json(admin))
+		.catch(e => res.status(500).json({ err: 'An error occurred'}));
+}

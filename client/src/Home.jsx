@@ -7,7 +7,7 @@ export default function Home() {
 			<Typography paragraph>
 				Welcome! This online Visitor Log Management System is an attempt to use online tools for the ease of communication process, thereby ensuring
 				smooth transition between a visitor and a faculty and decrease latency time.
-                </Typography>
+      </Typography>
 			<Divider />
 			<Typography paragraph>
 				This project is designed by Group G6, as part of DBMS project under <b>Dr.  V. B. Nikam</b> for the IV Semester.

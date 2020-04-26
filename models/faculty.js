@@ -6,7 +6,7 @@ var Schema = _Schema;
 
 var facultySchema = new Schema({
     Name: String,
-    Department: { type: Schema.Types.ObjectId, ref: 'Department' },
+    Department: String,
     Designation: String,
     email: {
         type: String,

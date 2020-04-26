@@ -22,7 +22,7 @@ exports.faculty_create = (req, res) => {
     let faculty = new Faculty({
         Name : req.body.firstName +" "+ req.body.lastName,
         Designation : req.body.designation,
-        Department : mongoose.Types.ObjectId(req.body.objectId),
+        Department : req.body.department,
         email : req.body.email
     });
 

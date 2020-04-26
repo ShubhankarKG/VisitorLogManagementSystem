@@ -1,20 +1,8 @@
 const Visitor = require("../models/visitor");
 const VisitingDetails = require("../models/visitingDetails");
 const mongoose = require("mongoose");
-const nodemailer = require("nodemailer");
-const dotenv = require("dotenv");
 const ejs = require("ejs");
-dotenv.config();
-
-var transporter = nodemailer.createTransport({
-  service: "gmail.com",
-  // port : 587,
-  // secure : true,
-  auth: {
-    user: 'shubhankar.gupto.11@gmail.com',
-    pass: process.env.MAIL_PASSWORD
-  }
-});
+const transporter = require('../mail_config');
 
 exports.test = (req, res) => {
   res.send("Working!");
@@ -63,7 +51,7 @@ exports.visitor_create = (req, res) => {
       if (err) console.log(err);
       else {
         const mailOptionsVisitor = {
-          from: "shubhankar.gupto.11@gmail.com",
+          from: process.env.MAIL_ID,
           to: req.body.email,
           subject: "Verify User",
           html: data,
@@ -108,7 +96,7 @@ exports.visitor_validate = (req, res) => {
                 if (err) console.log(err);
                 else {
                   const mailOptionsVisitor = {
-                    from: "shubhankar.gupto.11@gmail.com",
+                    from: process.env.MAIL_ID,
                     to: facultyEmail,
                     subject: "A visitor wants to meet you",
                     html: data,

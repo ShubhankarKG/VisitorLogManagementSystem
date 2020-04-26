@@ -1,8 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, Paper, Grid, TextField, Button, Typography } from '@material-ui/core';
 import "./Error.css";
 
 export default function AdminSignup() {
+	const history = useHistory();
+	let token = "";
 	const [form, updateForm] = React.useState({
 		email: "",
 		password: "",
@@ -25,17 +28,6 @@ export default function AdminSignup() {
 				...prevErrors,
 				email: "*Email can't be Empty",
 			}));
-		}
-
-		if (form.email) {
-			let pattern = new RegExp(/^[a-zA-Z0-9_+&*-] + (?:\\.[a-zA-Z0-9_+&*-]+ )*@(?:[a-zA-Z0-9-]+\\.) + [a-zA-Z]{2, 7}/);
-			if (!pattern.test(form.email)) {
-				formIsValid = false;
-				updateErrors(prevErrors => ({
-					...prevErrors,
-					errors: "*Please enter valid Email ID",
-				}));
-			}
 		}
 
 		/* Password Constraints 
@@ -101,20 +93,25 @@ export default function AdminSignup() {
 	}
 
 	function handleClick(event) {
-		event.preventDefault();
 		if (isFormValid()) {
-			// fetch(process.env.REACT_APP_API_REGISTER, {
-			// 	method: "POST",
-			// 	mode: "cors",
-			// 	headers: {
-			// 		"Content-Type": "application/json",
-			// 	},
-			// 	body: JSON.stringify(form),
-			// })
-			// 	.then((response) => response.json())
-			// 	.catch((err) => {
-			// 		console.log(err);
-			// 	});
+			event.preventDefault();
+			fetch("https://localhost:5000/api/admin/register", {
+				method: "POST",
+				mode: "cors",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(form),
+			})
+				.then((response) => response.json())
+				.then(response => {
+					token = response.token;
+					console.log(token);
+					history.push('/');
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 		else {
 			alert("There are errors in the form !");

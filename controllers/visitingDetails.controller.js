@@ -1,17 +1,6 @@
 const VisitingDetails = require("../models/visitingDetails");
-const mongoose = require("mongoose");
 const ejs = require("ejs");
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-  service: "gmail.com",
-  // port : 587,
-  // secure : true,
-  auth: {
-    user: "shubhankar.gupto.11@gmail.com",
-    pass: process.env.MAIL_PASSWORD,
-  },
-});
+const transporter = require("../mail_config");
 
 const months = [' January', ' February', ' March', ' April', ' May', ' June', 
                 ' July', ' August', ' September', ' October', ' November', ' December'];
@@ -84,7 +73,7 @@ exports.send_email = (req, res) => {
       if (err) console.log(err);
       else {
         const mailOptionsVisitor = {
-          from: "shubhankar.gupto.11@gmail.com",
+          from: process.env.MAIL_ID,
           to: req.body.VisitorEmail,
           subject: "Time and Place of meeting",
           html: data,
