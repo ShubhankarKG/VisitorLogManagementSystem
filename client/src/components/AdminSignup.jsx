@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Paper, Grid, TextField, Button, Typography } from '@material-ui/core';
 import "./Error.css";
+import constants from "../constants";
 
 export default function AdminSignup() {
 	const history = useHistory();
@@ -95,7 +96,7 @@ export default function AdminSignup() {
 	function handleClick(event) {
 		if (isFormValid()) {
 			event.preventDefault();
-			fetch("https://localhost:5000/api/admin/register", {
+			fetch(constants.ADMIN_REGISTER, {
 				method: "POST",
 				mode: "cors",
 				headers: {
@@ -107,7 +108,7 @@ export default function AdminSignup() {
 				.then(response => {
 					token = response.token;
 					console.log(token);
-					history.push('/');
+					// history.push('/');
 				})
 				.catch((err) => {
 					console.log(err);
@@ -183,7 +184,7 @@ export default function AdminSignup() {
 
 					<Grid item xs={12}>
 						<Typography>
-							If you are an admin already, you might want to <a href="https://localhost:3000/AdminLogin">Sign In</a> instead.
+							If you are an admin already, you might want to <a href={constants.ADMIN_LOGIN}>Sign In</a> instead.
 						</Typography>
 					</Grid>
 				</Grid>

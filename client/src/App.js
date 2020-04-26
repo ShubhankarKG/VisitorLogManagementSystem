@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import Home from "./Home.jsx";
-import Form from "./Form.jsx";
-import Faculty from "./Faculty.jsx";
+import Home from "./components/Home";
+import Form from "./components/Form.jsx";
+import Faculty from "./components/Faculty.jsx";
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
@@ -10,9 +10,9 @@ import { Divider, List, ListItem, ListItemText, AppBar, Toolbar, Typography, Ico
 import { Link, Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import download from "./assets/images/download.jpeg";
-import Dashboard from './Dashboard';
-import AdminSignup from "./AdminSignup";
-import AdminLogin from "./AdminLogin";
+import Dashboard from './components/Dashboard';
+import AdminSignup from "./components/AdminSignup";
+import AdminLogin from "./components/AdminLogin";
 
 const drawerWidth = 240;
 const history = createBrowserHistory();

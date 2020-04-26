@@ -3,6 +3,7 @@ import { Select, MenuItem, Typography, Container, Grid, TextField, Paper, Button
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
 import "./Error.css";
+import constants from "../constants";
 
 function Form() {
 
@@ -41,7 +42,7 @@ function Form() {
   const [faculty, setFaculty] = React.useState([]);
 
   function getData() {
-    axios.get("https://localhost:5000/api/faculty/")
+    axios.get(constants.FACULTY)
       .then((response) => {
         setFaculty(response.data);
       })
@@ -135,7 +136,7 @@ function Form() {
   function handleClick(event) {
     if (isFormValid()) {
       event.preventDefault();
-      fetch("https://localhost:5000/api/visitor/create", {
+      fetch(`${constants.VISITOR}/create`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -175,7 +176,7 @@ function Form() {
     }
     if (otpFieldRef.current && parseInt(otpFieldRef.current.value) === otp) {
       setError(false);
-      fetch("https://localhost:5000/api/visitor/validate", {
+      fetch(`${constants.VISITOR}/validate`, {
         method: "GET",
         mode: "cors",
         headers: {

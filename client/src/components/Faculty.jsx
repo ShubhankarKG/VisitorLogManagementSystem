@@ -1,6 +1,7 @@
 import React from 'react'
 import { Typography, Container, Grid, TextField, Paper, Button } from '@material-ui/core';
 import "./Error.css";
+import constants from "../constants";
 
 function Faculty() {
 	const [form, updateForm] = React.useState({
@@ -71,7 +72,7 @@ function Faculty() {
 	const handleClick = (event) => {
 		if (isFormValid()) {
 			event.preventDefault();
-			fetch("https://localhost:5000/api/faculty/create", {
+			fetch(`${constants.FACULTY}/create`, {
 				method: "POST",
 				mode: "cors",
 				headers: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Paper, Grid, TextField, Button, Typography } from '@material-ui/core';
 import "./Error.css";
+import constants from "../constants";
 
 export default function AdminSignin() {
 	const [form, updateForm] = React.useState({
@@ -118,7 +119,7 @@ export default function AdminSignin() {
 
 					<Grid item xs={12}>
 						<Typography>
-						If you are a new Admin, you might want to <a href="https://localhost:3000/AdminSignup">Sign Up</a> instead.
+							If you are a new Admin, you might want to <a href={constants.ADMIN_SIGNUP}>Sign Up</a> instead.
 						</Typography>
 					</Grid>
 				</Grid>
