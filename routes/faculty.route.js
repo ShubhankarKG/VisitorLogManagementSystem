@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-
+const auth = require('../middleware/auth');
 const faculty_controller = require("../controllers/faculty.controller");
 
 router.get("/", faculty_controller.faculty_retrieve);
-router.post("/create", faculty_controller.faculty_create);
-router.post("/submit", faculty_controller.faculty_submit);
+router.post("/create",auth, faculty_controller.faculty_create);
 
 module.exports = router;

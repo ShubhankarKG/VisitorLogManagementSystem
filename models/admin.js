@@ -4,7 +4,10 @@ const model = require('mongoose').model;
 var adminSchema = new Schema({
 	Email: String, 
 	IdNumber: Number,
-	Password: String,
+	Password: {
+		type : String,
+		maxlength : 80
+	}
 });
 
 module.exports = model('Admin', adminSchema);

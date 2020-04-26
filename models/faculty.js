@@ -11,11 +11,6 @@ var facultySchema = new Schema({
     email: {
         type: String,
     },
-    HOD: {
-        type: Boolean,
-        default: false,
-    },
-    username: String,
 });
 
 module.exports = model('Faculty', facultySchema);

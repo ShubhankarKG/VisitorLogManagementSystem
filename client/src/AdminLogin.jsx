@@ -71,7 +71,13 @@ export default function AdminSignin() {
 
 	return (
 		<Container maxWidth="sm">
-			<h2 className="heading"> ADMIN LOGIN </h2>
+			<header>
+				<div className="heading">
+					<Typography variant="h4">
+						ADMIN LOGIN
+					</Typography>
+				</div>
+			</header>
 			<Paper style={{ padding: 16 }} id="from_style">
 				<Grid container alignItems="flex-start" spacing={2}>
 					<Grid item xs={12}>

@@ -1,7 +1,8 @@
-import  React , { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Select, MenuItem, Typography, Container, Grid, TextField, Paper, Button } from '@material-ui/core';
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
+import "./Error.css";
 
 function Form() {
 
@@ -17,6 +18,18 @@ function Form() {
     description: "",
     facultyEmail: "",
     facultyUserName: "",
+  });
+
+  const [errors, setErrors] = React.useState({
+    firstName: "",
+    lastName: "",
+    contact: "",
+    gender: "",
+    address: "",
+    email: "",
+    gate: "",
+    description: "",
+    facultyUserName: ""
   });
 
   const [step, setStep] = React.useState(1);
@@ -37,28 +50,111 @@ function Form() {
       })
   }
 
+  function isFormValid() {
+    let formIsValid = true;
+    if (!form.firstName) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        firstName: "*First Name can't be empty"
+      })
+      )
+    }
+
+    if (!form.lastName) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        lastName: "*Last Name can't be empty"
+      }))
+    }
+
+    if (!form.address) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        address: "*Address can't be empty"
+      }))
+    }
+
+    if (!form.contact) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        contact: "*Contact Number can't be empty"
+      }))
+    }
+
+    if (!form.description) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        description: "*Reason for meeting can't be empty"
+      }))
+    }
+
+    if (!form.email) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        email: "*Email can't be empty"
+      }))
+    }
+
+    if (!form.facultyUserName) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        facultyUserName: "*Faculty to meet can't be empty"
+      }))
+    }
+
+    if (!form.gender) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        gender: "*Gender can't be empty"
+      }))
+    }
+
+    if (!form.gate) {
+      formIsValid = false;
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        gate: "*Name of gate entered can't be empty"
+      }))
+    }
+
+    return formIsValid;
+  }
+
   useEffect(() => {
     getData();
   }, []);
 
   function handleClick(event) {
-    event.preventDefault();
-    fetch("https://localhost:5000/api/visitor/create", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        setOtp(result.otp);
-        setStep(2);
+    if (isFormValid()) {
+      event.preventDefault();
+      fetch("https://localhost:5000/api/visitor/create", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((response) => response.json())
+        .then((result) => {
+          setOtp(result.otp);
+          setStep(2);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else {
+      alert("There are errors in your form !");
+    }
   }
 
   function handleChange(event) {
@@ -110,6 +206,7 @@ function Form() {
               onChange={handleChange}
               value={form.firstName}
             />
+            <div className="errorMsg">{errors.firstName}</div>
           </Grid>
 
           <Grid item xs={6}>
@@ -122,11 +219,12 @@ function Form() {
               onChange={handleChange}
               value={form.lastName}
             />
+            <div className="errorMsg">{errors.lastName}</div>
           </Grid>
 
           <Grid item xs={12}>
             <label> Gender: </label>
-            <Select 
+            <Select
               defaultValue="Male"
               onChange={(event) => {
                 updateForm(form => ({
@@ -138,6 +236,7 @@ function Form() {
               <MenuItem value='Male'>Male</MenuItem>
               <MenuItem value='Female'>Female</MenuItem>
             </Select>
+            <div className="errorMsg">{errors.gender}</div>
           </Grid>
 
           <Grid item xs={12}>
@@ -149,6 +248,7 @@ function Form() {
               name="contact"
               value={form.contact}
             />
+            <div className="errorMsg">{errors.contact}</div>
           </Grid>
 
           <Grid item xs={12}>
@@ -161,6 +261,7 @@ function Form() {
               name="email"
               value={form.email}
             />
+            <div className="errorMsg">{errors.email}</div>
           </Grid>
 
           <Grid item xs={12}>
@@ -173,6 +274,7 @@ function Form() {
               name="address"
               value={form.address}
             />
+            <div className="errorMsg">{errors.address}</div>
           </Grid>
 
           <Grid item xs={12}>
@@ -189,6 +291,7 @@ function Form() {
               <MenuItem value='Main Gate'>Main Gate</MenuItem>
               <MenuItem value='Mechanical Gate'>Mechanical Gate</MenuItem>
             </Select>
+            <div className="errorMsg">{errors.gate}</div>
           </Grid>
 
           <Grid item xs={12}>
@@ -218,6 +321,7 @@ function Form() {
                 />
               )}
             />
+            <div className="errorMsg">{errors.facultyUserName}</div>
           </Grid>
 
           <Grid item xs={12}>
@@ -230,10 +334,11 @@ function Form() {
               name="description"
               value={form.description}
             />
+            <div className="errorMsg">{errors.description}</div>
           </Grid>
 
-          <Grid container justify="center" item xs={12}>
-            <Button onClick={handleClick}>Submit</Button>
+          <Grid container justify="center" item>
+            <Button onClick={handleClick} variant="contained" color="secondary">Submit</Button>
           </Grid>
         </>
       );

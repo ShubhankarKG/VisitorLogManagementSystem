@@ -22,7 +22,7 @@ exports.admin_register = (req, res) => {
 			bcrypt.genSalt(10, (err, salt) => {
 				bcrypt.hash(newAdmin.Password, salt, (err, hash) => {
 					if (err) throw err;
-					newAdmin.password = hash;
+					newAdmin.Password = hash;
 					newAdmin.save()
 						.then(admin => {
 

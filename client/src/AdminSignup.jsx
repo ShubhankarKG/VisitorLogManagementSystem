@@ -123,7 +123,13 @@ export default function AdminSignup() {
 
 	return (
 		<Container maxWidth="sm">
-			<h1 className="heading"> SIGN UP </h1>
+			<header>
+				<div className="heading">
+					<Typography variant="h4">
+						ADMIN SIGNUP
+					</Typography>
+				</div>
+			</header>
 			<Paper style={{ padding: 16 }} id="from_style">
 				<Grid container alignItems="flex-start" spacing={2}>
 

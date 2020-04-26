@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const addHour = () => {
     return addHours(Date.now(), 1);
-}
+};
 
 var visitingDetailsSchema = new Schema({
     VisitorID : String,

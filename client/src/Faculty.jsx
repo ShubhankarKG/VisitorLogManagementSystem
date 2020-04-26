@@ -1,12 +1,6 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import Input from "@material-ui/core/Input";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import "./App.css";
+import { Typography, Container, Grid, TextField, Paper, Button } from '@material-ui/core';
+import "./Error.css";
 
 function Faculty() {
 	const [form, updateForm] = React.useState({
@@ -15,8 +9,51 @@ function Faculty() {
 		designation: "",
 		department: "",
 		email: "",
-		isHOD: false
 	});
+
+	const [errors, setErrors] = React.useState({
+		firstName: "",
+		designation: "",
+		department: "",
+		email: "",
+	});
+
+	function isFormValid() {
+		let formIsValid = true;
+		if (!form.firstName) {
+			formIsValid = false;
+			setErrors(prevErrors => ({
+				...prevErrors,
+				firstName: "*First Name cannot be empty",
+			}));
+		}
+
+		if (!form.department) {
+			formIsValid = false;
+			setErrors(prevErrors => ({
+				...prevErrors,
+				department: "*Department name cannot be empty",
+			}));
+		}
+
+		if (!form.designation) {
+			formIsValid = false;
+			setErrors(prevErrors => ({
+				...prevErrors,
+				designation: "*Designation cannot be empty",
+			}));
+		}
+
+		if (!form.email) {
+			formIsValid = false;
+			setErrors(prevErrors => ({
+				...prevErrors,
+				email: "*Email cannot be empty",
+			}));
+		}
+
+		return formIsValid;
+	}
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -31,88 +68,107 @@ function Faculty() {
 
 	}
 
+	const handleClick = (event) => {
+		if (isFormValid()) {
+			event.preventDefault();
+			fetch("https://localhost:5000/api/faculty/create", {
+				method: "POST",
+				mode: "cors",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(form),
+			})
+				.then((response) => response.json())
+				.catch((err) => {
+					console.log(err);
+				}
+				);
+		}
+		else {
+			alert('There are errors in your form !');
+		}
+	}
+
 	return (
 		<Container maxWidth="sm">
-			<Typography>
-				<h1 className="heading"> FACULTY ENTRY </h1>
-			</Typography>
-			<form action="https://localhost:5000/api/faculty/create" method="POST" id="form" noValidate>
-				<Paper style={{ padding: 16 }} id="from_style">
-					<Grid container alignItems="flex-start" spacing={2}>
-						<Grid item xs={6}>
-							<TextField
-								fullWidth
-								required
-								name="firstName"
-								type="text"
-								placeholder="First Name"
-								onChange={handleChange}
-								value={form.firstName}
-							/>
-						</Grid>
-
-						<Grid item xs={6}>
-							<TextField
-								fullWidth
-								required
-								name="lastName"
-								type="text"
-								placeholder="Last Name"
-								onChange={handleChange}
-								value={form.lastName}
-							/>
-						</Grid>
-
-						<Grid item xs={6}>
-							<TextField
-								fullWidth
-								required
-								name="designation"
-								type="text"
-								placeholder="Designation"
-								onChange={handleChange}
-								value={form.designation}
-							/>
-						</Grid>
-
-						<Grid item xs={6}>
-							<TextField
-								fullWidth
-								required
-								name="department"
-								type="text"
-								placeholder="Department"
-								onChange={handleChange}
-								value={form.department}
-							/>
-						</Grid>
-
-						<Grid item xs={12}>
-							<TextField
-								required
-								fullWidth
-								onChange={handleChange}
-								type="email"
-								placeholder="Email"
-								name="email"
-								value={form.email} />
-						</Grid>
-
-						<Grid item xs={12} justify="center">
-							<Input
-								disableUnderline
-								type="submit"
-								inputProps={{
-									form: "form",
-									style: {
-										cursor: "pointer"
-									}
-								}}
-								className="submit" />
-						</Grid>
+			<header>
+				<div className="heading">
+					<Typography variant="h4">
+						FACULTY ENTRY
+					</Typography>
+				</div>
+			</header>
+			<Paper style={{ padding: 16 }} id="from_style">
+				<Grid container alignItems="flex-start" spacing={2}>
+					<Grid item xs={6}>
+						<TextField
+							fullWidth
+							required
+							name="firstName"
+							type="text"
+							placeholder="First Name"
+							onChange={handleChange}
+							value={form.firstName}
+						/>
+						<div className="errorMsg">{errors.firstName}</div>
 					</Grid>
-				</Paper>
-			</form>
+
+					<Grid item xs={6}>
+						<TextField
+							fullWidth
+							required
+							name="lastName"
+							type="text"
+							placeholder="Last Name"
+							onChange={handleChange}
+							value={form.lastName}
+						/>
+					</Grid>
+
+					<Grid item xs={6}>
+						<TextField
+							fullWidth
+							required
+							name="designation"
+							type="text"
+							placeholder="Designation"
+							onChange={handleChange}
+							value={form.designation}
+						/>
+						<div className="errorMsg">{errors.designation}</div>
+					</Grid>
+
+					<Grid item xs={6}>
+						<TextField
+							fullWidth
+							required
+							name="department"
+							type="text"
+							placeholder="Department"
+							onChange={handleChange}
+							value={form.department}
+						/>
+						<div className="errorMsg">{errors.department}</div>
+					</Grid>
+
+					<Grid item xs={12}>
+						<TextField
+							required
+							fullWidth
+							onChange={handleChange}
+							type="email"
+							placeholder="Email"
+							name="email"
+							value={form.email} />
+						<div className="errorMsg">{errors.email}</div>
+					</Grid>
+
+					<Grid container item justify="center">
+						<Button onClick={handleClick} variant="contained" color="secondary">Submit</Button>
+					</Grid>
+				</Grid>
+			</Paper>
 		</Container>
 
 	)
