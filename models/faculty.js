@@ -11,6 +11,7 @@ var facultySchema = new Schema({
     email: {
         type: String,
     },
+    username: String,
 });
 
 module.exports = model('Faculty', facultySchema);

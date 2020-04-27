@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Paper, Container, Grid, TextField, Input, IconButton, Typography } from "@material-ui/core";
-import { CircularProgress, Table, TableBody, TableCell, TableHead, TableContainer, TableRow } from "@material-ui/core";
+import { CircularProgress, Table, TableBody, TableCell, TableHead, TableContainer, TableRow, TablePagination, TableFooter } from "@material-ui/core";
 import { Email, CheckCircle, CloudUpload } from "@material-ui/icons";
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker,	TimePicker,	MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -12,6 +12,8 @@ export default function Dashboard(props) {
 	const [step, setStep] = React.useState(0);
 	const [dirtyList, setDirtyList] = React.useState(null);
 	const [progressList, setProgressList] = React.useState(null);
+	const [page, setPage] = React.useState(0);
+	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 	const userRef = React.useRef(null);
 
 	React.useEffect(() => {
@@ -204,6 +206,20 @@ export default function Dashboard(props) {
 		)
 	}
 
+	const getPagination = () => {
+	return (
+		<TablePagination
+			count={data.length}
+			page={page}	
+			onChangePage={(event, page) => setPage(page)}	
+			rowsPerPage={rowsPerPage}	
+			onChangeRowsPerPage={(event) => setRowsPerPage(event.target.value)}
+			rowsPerPageOptions={[5, 10, 15]}
+		>
+		</TablePagination>
+		)
+	}
+
 	if (!step)
 		return (
 			<Container maxWidth="xs">
@@ -265,6 +281,11 @@ export default function Dashboard(props) {
 									{getTableHead()}
 									{!!data && getTableBody()}
 									{!data && showPlaceHolder()}
+									<TableFooter>
+										<TableRow>
+											{!!data && getPagination()}
+										</TableRow>
+									</TableFooter>
 								</Table>
 							</TableContainer>
 						</Grid>
