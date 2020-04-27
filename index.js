@@ -6,6 +6,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const path = require('path');
 
 const options = {
     key: fs.readFileSync("rootSSL.key"),
@@ -30,15 +31,15 @@ app.use(express.json({ limit : '50mb' }));
 app.use(express.urlencoded({ extended : true, limit : '50mb' }));
 app.use(morgan("combined"));
 
-app.get('/api', (req, res) => {
-    res.sendFile("client/index.html");
-});
-
 app.use('/api/visitor', visitor);
 app.use('/api/faculty', faculty);
 app.use('/api/dashboard', visitingDetails);
 app.use('/api/admin', admin);
 app.use(express.static('client/build'));
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 app.set('view engine', 'ejs');
 db.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
