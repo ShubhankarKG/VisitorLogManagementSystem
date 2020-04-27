@@ -28,6 +28,6 @@ exports.faculty_create = (req, res) => {
 
     faculty.save((err) => {
         if (err) console.log(err);
-        else res.send("Faculty added successfully");
+        else res.status(200).json({ msg : "Faculty added successfully" });
     });
 };

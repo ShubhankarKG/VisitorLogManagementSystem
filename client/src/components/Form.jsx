@@ -11,10 +11,10 @@ function Form() {
     firstName: "",
     lastName: "",
     contact: "",
-    gender: "",
+    gender: "Male",
     address: "",
     email: "",
-    gate: "",
+    gate: "Main Gate",
     facultyID: "",
     description: "",
     facultyEmail: "",
@@ -194,7 +194,7 @@ function Form() {
     if (step === 1) {
       return (
         <>
-          <Grid item container xs={12}>
+          <Grid item xs={12}>
             <label> Name : </label>
           </Grid>
           <Grid item xs={6}>
@@ -207,7 +207,7 @@ function Form() {
               onChange={handleChange}
               value={form.firstName}
             />
-            <div className="errorMsg">{errors.firstName}</div>
+            { (errors.firstName)? <div className="errorMsg">{errors.firstName}</div> : null }
           </Grid>
 
           <Grid item xs={6}>
@@ -220,7 +220,7 @@ function Form() {
               onChange={handleChange}
               value={form.lastName}
             />
-            <div className="errorMsg">{errors.lastName}</div>
+            { (errors.lastName)? <div className="errorMsg">{errors.lastName}</div> : null }
           </Grid>
 
           <Grid item xs={12}>
@@ -237,7 +237,8 @@ function Form() {
               <MenuItem value='Male'>Male</MenuItem>
               <MenuItem value='Female'>Female</MenuItem>
             </Select>
-            <div className="errorMsg">{errors.gender}</div>
+            {/* <div className="errorMsg">{errors.gender}</div> */}
+            { (errors.gender)? <div className="errorMsg">{errors.gender}</div> : null }
           </Grid>
 
           <Grid item xs={12}>
@@ -249,7 +250,8 @@ function Form() {
               name="contact"
               value={form.contact}
             />
-            <div className="errorMsg">{errors.contact}</div>
+            {/* <div className="errorMsg">{errors.contact}</div> */}
+            { (errors.contact)? <div className="errorMsg">{errors.contact}</div> : null }
           </Grid>
 
           <Grid item xs={12}>
@@ -262,7 +264,8 @@ function Form() {
               name="email"
               value={form.email}
             />
-            <div className="errorMsg">{errors.email}</div>
+            {/* <div className="errorMsg">{errors.email}</div> */}
+            { (errors.email)? <div className="errorMsg">{errors.email}</div> : null }
           </Grid>
 
           <Grid item xs={12}>
@@ -275,7 +278,8 @@ function Form() {
               name="address"
               value={form.address}
             />
-            <div className="errorMsg">{errors.address}</div>
+            {/* <div className="errorMsg">{errors.address}</div> */}
+            { (errors.address)? <div className="errorMsg">{errors.address}</div> : null }
           </Grid>
 
           <Grid item xs={12}>
@@ -292,7 +296,8 @@ function Form() {
               <MenuItem value='Main Gate'>Main Gate</MenuItem>
               <MenuItem value='Mechanical Gate'>Mechanical Gate</MenuItem>
             </Select>
-            <div className="errorMsg">{errors.gate}</div>
+            {/* <div className="errorMsg">{errors.gate}</div> */}
+            { (errors.gate)? <div className="errorMsg">{errors.gate}</div> : null }
           </Grid>
 
           <Grid item xs={12}>
@@ -322,7 +327,8 @@ function Form() {
                 />
               )}
             />
-            <div className="errorMsg">{errors.facultyUserName}</div>
+            {/* <div className="errorMsg">{errors.facultyUserName}</div> */}
+            { (errors.facultyUserName)? <div className="errorMsg">{errors.facultyUserName}</div> : null }
           </Grid>
 
           <Grid item xs={12}>
@@ -335,7 +341,8 @@ function Form() {
               name="description"
               value={form.description}
             />
-            <div className="errorMsg">{errors.description}</div>
+            {/* <div className="errorMsg">{errors.description}</div> */}
+            { (errors.description)? <div className="errorMsg">{errors.description}</div> : null }
           </Grid>
 
           <Grid container justify="center" item>

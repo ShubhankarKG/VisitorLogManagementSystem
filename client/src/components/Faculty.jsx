@@ -3,7 +3,9 @@ import { Typography, Container, Grid, TextField, Paper, Button } from '@material
 import "./Error.css";
 import constants from "../constants";
 
-function Faculty() {
+function Faculty(props) {
+	const { userToken } = props;
+
 	const [form, updateForm] = React.useState({
 		firstName: "",
 		lastName: "",
@@ -72,15 +74,28 @@ function Faculty() {
 	const handleClick = (event) => {
 		if (isFormValid()) {
 			event.preventDefault();
+			console.log(userToken);
 			fetch(`${constants.FACULTY}/create`, {
 				method: "POST",
 				mode: "cors",
 				headers: {
 					"Content-Type": "application/json",
+					"x-auth-token": sessionStorage.getItem("adminToken")
 				},
 				body: JSON.stringify(form),
 			})
-				.then((response) => response.json())
+				.then(response => {
+					if (response.status === 200) {
+						if (response.msg === "Faculty added successfully") {
+							alert(`Faculty ${form.firstName} ${form.lastName} added sucessfully!`)
+						}
+					}
+					else {
+						sessionStorage.clear();
+						if (response.status===400) alert("Token invalid. Access prohibited");
+						else if (response.status===401) alert("Unauthorised transaction");
+					}
+				})
 				.catch((err) => {
 					console.log(err);
 				}

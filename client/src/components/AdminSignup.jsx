@@ -4,9 +4,9 @@ import { Container, Paper, Grid, TextField, Button, Typography } from '@material
 import "./Error.css";
 import constants from "../constants";
 
-export default function AdminSignup() {
+export default function AdminSignup(props) {
+	const { userToken, handleUserToken } = props;
 	const history = useHistory();
-	let token = "";
 	const [form, updateForm] = React.useState({
 		email: "",
 		password: "",
@@ -106,13 +106,30 @@ export default function AdminSignup() {
 			})
 				.then((response) => response.json())
 				.then(response => {
-					token = response.token;
-					console.log(token);
-					// history.push('/');
+					console.log(response);
+					if (response.msg === "Invalid Credentials") {
+						alert("Username/Password invalid ! Please try again.");
+					}
+					else {
+						/* Response format
+						{
+							token : Token,
+							admin : {
+								email : "",
+								id : "",
+								idNumber : ""
+							}
+						}
+						*/
+						handleUserToken(response.token);
+						history.push('/Home');
+					}
+
 				})
 				.catch((err) => {
 					console.log(err);
 				});
+
 		}
 		else {
 			alert("There are errors in the form !");
@@ -184,7 +201,7 @@ export default function AdminSignup() {
 
 					<Grid item xs={12}>
 						<Typography>
-							If you are an admin already, you might want to <a href={constants.ADMIN_LOGIN}>Sign In</a> instead.
+							If you are an admin already, you might want to <a href="/AdminLogin">Sign In</a> instead.
 						</Typography>
 					</Grid>
 				</Grid>
