@@ -1,18 +1,17 @@
 import React from 'react';
 import clsx from 'clsx';
-import Home from "./Home.jsx";
-import Form from "./Form.jsx";
-import Faculty from "./Faculty.jsx";
+import Home from "./components/Home";
+import Form from "./components/Form.jsx";
+import Faculty from "./components/Faculty.jsx";
 import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import { Menu, ChevronLeft } from '@material-ui/icons';
 import { Divider, List, ListItem, ListItemText, AppBar, Toolbar, Typography, IconButton, Drawer, CssBaseline, Button } from '@material-ui/core';
-import { Link, Router, Route } from "react-router-dom";
+import { Link, Router, Route, Switch, Redirect } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import download from "./assets/images/download.jpeg";
-import Dashboard from './Dashboard';
-import AdminSignup from "./AdminSignup";
-import AdminLogin from "./AdminLogin";
+import Dashboard from './components/Dashboard';
+import AdminSignup from "./components/AdminSignup";
+import AdminLogin from "./components/AdminLogin";
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -77,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [userToken, setUserToken] = React.useState("");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -90,44 +90,48 @@ function App() {
     history.push('/AdminLogin');
   }
 
+  function handleUserToken(userToken) {
+    sessionStorage.setItem("adminToken", userToken);
+    setUserToken(userToken);
+  }
+
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-        style={{ display: 'flex' }}
-      >
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
+    <Router history={history}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="absolute"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+          style={{ display: 'flex' }}
+        >
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
 
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title} noWrap style={{ flex: 1 }}>
-            Visitor Log - VJTI
+            >
+              <Menu />
+            </IconButton>
+            <Typography variant="h6" className={classes.title} noWrap style={{ flex: 1 }}>
+              Visitor Log - VJTI
           </Typography>
-          <IconButton
-            edge="end"
-            color="inherit"
-          >
-            <Button variant="contained" color="primary" disableElevation onClick={handleAdmin}>
-              <Typography variant="h6" className={classes.title}>
-                Admin
+            <IconButton
+              edge="end"
+              color="inherit"
+            >
+              <Button variant="contained" color="primary" disableElevation onClick={handleAdmin}>
+                <Typography variant="h6" className={classes.title}>
+                  Admin
               </Typography>
-            </Button>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      <Router history={history}>
+              </Button>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
         <Drawer
           className={classes.drawer}
           variant="persistent"
@@ -139,7 +143,7 @@ function App() {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
+              <ChevronLeft />
             </IconButton>
           </div>
           <ListItem>
@@ -175,15 +179,19 @@ function App() {
         })}>
 
           <div className={classes.drawerHeader} />
+          {/* <p>{(userToken) ? userToken : "No user token"}</p> */}
+          <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/form" component={Form} />
-            <Route path="/faculty" component={Faculty} />
+            <Route path="/faculty" render={(props) => <Faculty {...props} userToken={userToken} />} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/adminSignup" component={AdminSignup}/>
-            <Route path="/adminLogin" component={AdminLogin}/>
+            <Route path="/adminSignup" render={(props) => <AdminSignup {...props} userToken={userToken} handleUserToken={handleUserToken} />} />
+            <Route path="/adminLogin" render={(props) => <AdminLogin {...props} userToken={userToken} handleUserToken={handleUserToken} />} />
+            <Route path="*"> <Redirect to="/" /> </Route>
+          </Switch>
         </main>
-      </Router>
-    </div>
+      </div>
+    </Router>
 
   );
 }

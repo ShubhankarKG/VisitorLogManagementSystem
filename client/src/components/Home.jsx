@@ -1,9 +1,9 @@
 import React from 'react'
-import { Typography, Divider } from "@material-ui/core";
+import { Typography, Divider, Container } from "@material-ui/core";
 
 export default function Home() {
 	return (
-		<div>
+		<Container>
 			<Typography paragraph>
 				Welcome! This online Visitor Log Management System is an attempt to use online tools for the ease of communication process, thereby ensuring
 				smooth transition between a visitor and a faculty and decrease latency time.
@@ -23,7 +23,7 @@ export default function Home() {
 			<Typography paragraph>
 				We would like to thank everyone for their help in making this successful, especially our professors!
       </Typography>
-		</div>
+		</Container>
 	)
 
 }

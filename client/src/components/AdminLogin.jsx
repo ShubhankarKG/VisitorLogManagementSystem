@@ -1,8 +1,12 @@
 import React from 'react';
 import { Container, Paper, Grid, TextField, Button, Typography } from '@material-ui/core';
+import { useHistory } from "react-router-dom";
 import "./Error.css";
+import constants from "../constants";
 
-export default function AdminSignin() {
+export default function AdminSignin(props) {
+
+	const history = useHistory();
 	const [form, updateForm] = React.useState({
 		email: "",
 		password: "",
@@ -12,6 +16,8 @@ export default function AdminSignin() {
 		email: "",
 		password: "",
 	});
+
+	const { userToken, handleUserToken } = props;
 
 	function isFormValid() {
 		let formIsValid = true;
@@ -50,19 +56,39 @@ export default function AdminSignin() {
 
 	function handleClick(event) {
 		if (isFormValid()) {
-			// event.preventDefault();
-			// fetch(process.env.REACT_APP_API_LOGIN, {
-			// 	method: "POST",
-			// 	mode: "cors",
-			// 	headers: {
-			// 		"Content-Type": "application/json",
-			// 	},
-			// 	body: JSON.stringify(form),
-			// })
-			// 	.then((response) => response.json())
-			// 	.catch((err) => {
-			// 		console.log(err);
-			// 	});
+			fetch(constants.ADMIN_LOGIN, {
+				method: "POST",
+				mode: "cors",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(form),
+			})
+				.then((response) => response.json())
+				.then(response => {
+					console.log(response);
+					if (response.msg === "Invalid Credentials") {
+						alert("Username/Password invalid ! Please try again.");
+					}
+					else {
+						/* Response format
+						{
+							token : Token,
+							admin : {
+								email : "",
+								id : "",
+								idNumber : ""
+							}
+						}
+						*/
+						handleUserToken(response.token);
+						history.push('/Home');
+					}
+
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 		else {
 			alert("There are errors in your form !");
@@ -118,7 +144,7 @@ export default function AdminSignin() {
 
 					<Grid item xs={12}>
 						<Typography>
-						If you are a new Admin, you might want to <a href="https://localhost:3000/AdminSignup">Sign Up</a> instead.
+							If you are a new Admin, you might want to <a href="/AdminSignup">Sign Up</a> instead.
 						</Typography>
 					</Grid>
 				</Grid>

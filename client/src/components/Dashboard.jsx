@@ -4,8 +4,8 @@ import { Paper, Container, Grid, TextField, Input, IconButton, Typography } from
 import { CircularProgress, Table, TableBody, TableCell, TableHead, TableContainer, TableRow, TablePagination, TableFooter } from "@material-ui/core";
 import { Email, CheckCircle, CloudUpload } from "@material-ui/icons";
 import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker,	TimePicker,	MuiPickersUtilsProvider } from '@material-ui/pickers';
-
+import { DatePicker, TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import constants from "../constants";
 
 export default function Dashboard(props) {
 	const [data, setData] = React.useState(null);
@@ -22,7 +22,7 @@ export default function Dashboard(props) {
 
 	const getData = () => {
 		axios
-			.get(`https://localhost:5000/api/dashboard/${userRef.current}`)
+			.get(`${constants.FACULTY_DASHBOARD}/${userRef.current}`)
 			.then((res) => {
 				setData(res.data);
 				setDirtyList(res.data.map(item => false));
@@ -31,7 +31,7 @@ export default function Dashboard(props) {
 	};
 
 	const updateDatabase = (index) => {
-		axios.post('https://localhost:5000/api/dashboard/', data[index])
+		axios.post(constants.FACULTY_DASHBOARD, data[index])
 			.then(res => {
 				if (res.data.info === 'success') {
 					setProgressList(list => list.map((_item, _index) => {
@@ -49,7 +49,7 @@ export default function Dashboard(props) {
 	}
 
 	const sendMail = (index) => {
-		axios.post('https://localhost:5000/api/dashboard/mail', data[index])
+		axios.post(`${constants.FACULTY_DASHBOARD}}/mail`, data[index])
 			.then(res => {
 				if (res.data.info === 'success') {
 					console.log('email sent successfully!');
