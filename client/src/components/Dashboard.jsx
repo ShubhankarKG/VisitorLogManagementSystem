@@ -16,10 +16,6 @@ export default function Dashboard(props) {
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 	const userRef = React.useRef(null);
 
-	React.useEffect(() => {
-		console.log(data);
-	})
-
 	const getData = () => {
 		axios
 			.get(`${constants.FACULTY_DASHBOARD}/${userRef.current}`)
@@ -49,7 +45,7 @@ export default function Dashboard(props) {
 	}
 
 	const sendMail = (index) => {
-		axios.post(`${constants.FACULTY_DASHBOARD}}/mail`, data[index])
+		axios.post(`${constants.FACULTY_DASHBOARD}/mail`, data[index])
 			.then(res => {
 				if (res.data.info === 'success') {
 					console.log('email sent successfully!');
@@ -228,7 +224,6 @@ export default function Dashboard(props) {
 						container
 						spacing={3}
 						justify="center"
-						alignItems="space-around"
 					>
 						<Grid item xs={12}>
 							<Typography align="center" gutterBottom variant="h5">
@@ -274,7 +269,7 @@ export default function Dashboard(props) {
 		<MuiPickersUtilsProvider utils={DateFnsUtils}>
 			<Container>
 				<Paper>
-					<Grid container justify='center' spacing={3}>
+					<Grid container justify='center'>
 						<Grid item>
 							<TableContainer>
 								<Table>
