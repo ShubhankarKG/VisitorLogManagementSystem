@@ -5,10 +5,12 @@ const transporter = require("../mail_config");
 const months = [' January', ' February', ' March', ' April', ' May', ' June', 
                 ' July', ' August', ' September', ' October', ' November', ' December'];
 
-const getTime = (date) => {
-  let hour = date.getHours();
+const getTime = (_date) => {
+  _date.setHours(_date.getHours() + 5);
+  _date.setMinutes(_date.getMinutes() + 30);
+  let hour = _date.getHours();
   let ampm = " AM";
-  let minute = date.getMinutes();
+  let minute = _date.getMinutes();
   if(hour < 10) {
     hour = "0" + hour.toString();
   }
@@ -23,6 +25,8 @@ const getTime = (date) => {
 }
 
 const getDate = (_date) => {
+    _date.setHours(_date.getHours() + 5);
+    _date.setMinutes(_date.getMinutes() + 30);
     let date = _date.getDate();
     if(date % 10 === 1) {
         date = date.toString() + 'st';

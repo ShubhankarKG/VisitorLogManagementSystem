@@ -84,6 +84,7 @@ function Faculty(props) {
 				},
 				body: JSON.stringify(form),
 			})
+				.then(res => res.json())
 				.then(response => {
 					if (response.status === 200) {
 						if (response.msg === "Faculty added successfully") {
