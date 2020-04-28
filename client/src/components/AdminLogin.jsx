@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Container, Paper, Grid, TextField, Button, Typography } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import "./Error.css";
@@ -17,7 +18,7 @@ export default function AdminSignin(props) {
 		password: "",
 	});
 
-	const { userToken, handleUserToken } = props;
+	const { handleUserToken } = props;
 
 	function isFormValid() {
 		let formIsValid = true;
@@ -144,7 +145,7 @@ export default function AdminSignin(props) {
 
 					<Grid item xs={12}>
 						<Typography>
-							If you are a new Admin, you might want to <a href="/AdminSignup">Sign Up</a> instead.
+							If you are a new Admin, you might want to <Link to="/AdminSignup">Sign Up</Link> instead.
 						</Typography>
 					</Grid>
 				</Grid>

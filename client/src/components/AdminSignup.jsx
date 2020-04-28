@@ -1,11 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Container, Paper, Grid, TextField, Button, Typography } from '@material-ui/core';
 import "./Error.css";
 import constants from "../constants";
 
 export default function AdminSignup(props) {
-	const { userToken, handleUserToken } = props;
+	const { handleUserToken } = props;
 	const history = useHistory();
 	const [form, updateForm] = React.useState({
 		email: "",
@@ -201,7 +201,7 @@ export default function AdminSignup(props) {
 
 					<Grid item xs={12}>
 						<Typography>
-							If you are an admin already, you might want to <a href="/AdminLogin">Sign In</a> instead.
+							If you are an admin already, you might want to <Link to="/AdminLogin">Sign In</Link> instead.
 						</Typography>
 					</Grid>
 				</Grid>
