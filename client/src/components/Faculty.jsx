@@ -84,18 +84,18 @@ function Faculty(props) {
 				},
 				body: JSON.stringify(form),
 			})
-				.then(res => res.json())
-				.then(response => {
-					if (response.status === 200) {
-						if (response.msg === "Faculty added successfully") {
-							alert(`Faculty ${form.firstName} ${form.lastName} added sucessfully!`)
-						}
-					}
+				.then(res => {
+					if (res.status === 200) return res.json();
 					else {
 						sessionStorage.clear();
 						if (response.status===400) alert("Token invalid. Access prohibited");
 						else if (response.status===401) alert("Unauthorised transaction");
+						return { msg: "There was an error" };
 					}
+				})
+				.then(response => {
+					if (response.msg === "Faculty added successfully")
+						alert(`Faculty ${form.firstName} ${form.lastName} added sucessfully!`);
 				})
 				.catch((err) => {
 					console.log(err);
