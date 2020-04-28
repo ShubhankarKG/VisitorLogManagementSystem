@@ -12,6 +12,7 @@ import download from "./assets/images/download.jpeg";
 import Dashboard from './components/Dashboard';
 import AdminSignup from "./components/AdminSignup";
 import AdminLogin from "./components/AdminLogin";
+import constants from "./constants";
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -96,7 +97,7 @@ function App() {
   }
 
   return (
-    <Router history={history}>
+    <Router history={history} basename={constants.PUBLIC_URL}>
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
