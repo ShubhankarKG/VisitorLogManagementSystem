@@ -1,10 +1,10 @@
 export default {
     // ADMIN_SIGNUP : "https://localhost:3000/AdminSignup",
     // ADMIN_LOGIN : "https://localhost:3000/AdminLogin",
-    ADMIN_REGISTER : "https://vlogs-vjti.web.app/api/admin/register",
-    ADMIN_LOGIN : "https://vlogs-vjti.web.app/api/admin/login",
-    FACULTY_DASHBOARD : "https://vlogs-vjti.web.app/api/dashboard",
-    FACULTY : "https://vlogs-vjti.web.app/api/faculty/",
-    VISITOR : "https://vlogs-vjti.web.app/api/visitor",
-    PUBLIC_URL : "https://vlogs-vjti.web.app"
+    ADMIN_REGISTER : "https://sleepy-peak-76140.herokuapp.com/api/admin/register",
+    ADMIN_LOGIN : "https://sleepy-peak-76140.herokuapp.com/api/admin/login",
+    FACULTY_DASHBOARD : "https://sleepy-peak-76140.herokuapp.com/api/dashboard",
+    FACULTY : "https://sleepy-peak-76140.herokuapp.com/api/faculty/",
+    VISITOR : "https://sleepy-peak-76140.herokuapp.com/api/visitor",
+    PUBLIC_URL : "https://sleepy-peak-76140.herokuapp.com"
 }
