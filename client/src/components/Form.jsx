@@ -177,7 +177,7 @@ function Form() {
     if (otpFieldRef.current && parseInt(otpFieldRef.current.value) === otp) {
       setError(false);
       fetch(`${constants.VISITOR}/validate`, {
-        method: "GET",
+        method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
