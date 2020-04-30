@@ -13,6 +13,7 @@ import Dashboard from './components/Dashboard';
 import AdminSignup from "./components/AdminSignup";
 import AdminLogin from "./components/AdminLogin";
 import constants from "./constants";
+import Error from './components/Error';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -183,12 +184,12 @@ function App() {
           {/* <p>{(userToken) ? userToken : "No user token"}</p> */}
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/form" component={Form} />
-            <Route path="/faculty" render={(props) => <Faculty {...props} userToken={userToken} />} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/adminSignup" render={(props) => <AdminSignup {...props} userToken={userToken} handleUserToken={handleUserToken} />} />
-            <Route path="/adminLogin" render={(props) => <AdminLogin {...props} userToken={userToken} handleUserToken={handleUserToken} />} />
-            <Route path="*"> <Redirect to="/" /> </Route>
+            <Route exact path="/form" component={Form} />
+            <Route exact path="/faculty" render={(props) => <Faculty {...props} userToken={userToken} />} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/adminSignup" render={(props) => <AdminSignup {...props} userToken={userToken} handleUserToken={handleUserToken} />} />
+            <Route exact path="/adminLogin" render={(props) => <AdminLogin {...props} userToken={userToken} handleUserToken={handleUserToken} />} />
+            <Route component={Error} />
           </Switch>
         </main>
       </div>
