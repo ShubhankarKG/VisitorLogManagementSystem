@@ -122,7 +122,7 @@ export default function AdminSignup(props) {
 						}
 						*/
 						handleUserToken(response.token);
-						history.push('/Home');
+						history.push('/');
 					}
 
 				})
