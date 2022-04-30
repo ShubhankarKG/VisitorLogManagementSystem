@@ -36,10 +36,10 @@
     "nodemailer": "^6.6.1"
   },
   "devDependencies": {
-    "jshint": "^2.11.0",
+    "concurrently": "^5.1.0",
+    "jshint": "^2.13.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.2",
-    "uuid": "^7.0.2",
-    "concurrently": "^5.1.0"
+    "uuid": "^7.0.2"
   }
 }
